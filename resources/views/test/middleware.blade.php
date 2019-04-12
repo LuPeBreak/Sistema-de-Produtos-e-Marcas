@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -81,11 +82,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                        {{ config('app.name', 'Laravel') }}
+                    {{ strtoupper($message)}} page!
                 </div>
-
-                
             </div>
+            
         </div>
     </body>
 </html>
