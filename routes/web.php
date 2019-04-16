@@ -22,10 +22,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 //Rotas de  teste
-Route::prefix('test')->group(function () {
-    Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
-    {
-        Route::get('/adminPage', 'HomeController@admin');
-    });
-});
+// Route::prefix('test')->group(function () {
+//     Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
+//     {
+//         Route::get('/adminPage', 'HomeController@admin');
+//     });
+// });
 

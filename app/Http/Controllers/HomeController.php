@@ -26,7 +26,7 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function admin(){
-        return view("test/middleware")->withMessage('Admin');
-    }
+    // public function admin(){
+    //     return view("test/middleware")->withMessage('Admin');
+    // }
 }
