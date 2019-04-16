@@ -25,7 +25,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('brand_register');
     }
 
     /**
@@ -36,7 +36,12 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:brands|max:30',
+            'description' => 'required',
+        ]);
+        Brand::create($validatedData);
+        return redirect('/brands');
     }
 
     /**
@@ -58,7 +63,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return view('brand_register',compact('brand'));
     }
 
     /**
@@ -70,7 +75,12 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:brands|max:30',
+            'description' => 'required',
+        ]);
+        $brand->update($validatedData);
+        return redirect('/brands');
     }
 
     /**
@@ -81,6 +91,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+        return redirect('/brands');
     }
 }
