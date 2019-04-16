@@ -26,6 +26,7 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 </head>
 
 <body>
@@ -45,8 +46,11 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
-                        <li class="nav-item"><a class="nav-link" href="/home">Produtos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/marcas">Marcas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/products">Produtos</a></li>
+                        @if (Auth::user() && Auth::user()->isAdmin())
+                        <li class="nav-item"><a class="nav-link" href="/brands">Marcas</a></li>
+                        @endif
+                        
                         
 
                     </ul>

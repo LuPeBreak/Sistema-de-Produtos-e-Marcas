@@ -39,6 +39,6 @@ class User extends Authenticatable
 
 
     public function isAdmin(){
-        return (\Auth::check() && $this->role == 'Admin');
+        return (\Auth::check() && $this->type == 'admin');
     }
 }
