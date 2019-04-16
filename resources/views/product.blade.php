@@ -8,6 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 <div class="container">
+        <a class='btn-floating btn-small waves-effect waves-light green ml-auto' href="/products/create"><i class="fa fa-plus"></i></a>
     <div class="row justify-content-center">
         @foreach ($products as $product)
             <div class="col-md-4">
@@ -16,15 +17,14 @@
                         <div class="card">
                             <div class="card-image">
                                 <img src="images/sample-1.jpg">
-                                <span class="card-title">Card Title</span>
+                                <span class="card-title">{{$product->name}}</span>
                                 <a class="btn-floating halfway-fab waves-effect waves-light blue"><i
                                         class="fa fa-edit"></i></a>
                             </div>
     
                             <div class="card-content">
-                                Marca:
-                                <p>I am a very simple card. I am good at containing small bits of information. I am
-                                    convenient because I require little markup to use effectively.</p>
+                                Marca:{{$product->brand->name}}
+                                <p>{{$product->description}}</p>
                             </div>
                         </div>
                     </div>

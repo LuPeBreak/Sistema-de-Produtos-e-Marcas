@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Brand;
 use Illuminate\Http\Request;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -14,7 +16,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product');
+        $products = Product::all();
+        return view('product',compact('products'));
+
     }
 
     /**
@@ -24,7 +28,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $brands = Brand::all();
+        return view('product_register',compact('brands'));
     }
 
     /**
@@ -35,7 +40,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //valida dados
+        $validatedData = $request->validate([
+            'name' => 'required|unique:products|max:30',
+            'description' => 'required',
+        ]);
+            //procura pela marca informada
+        $brand = Brand::findOrFail($request->brand);
+            //salva de acordo com a marca informada
+        $brand->products()->create([
+            'name'=> $validatedData['name'],
+            'description'=> $validatedData['description'],
+            'user_id'=>Auth::user()->id,
+        ]);
+        return redirect('/brands');
     }
 
     /**

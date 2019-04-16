@@ -17,9 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'ProductController@index')->name('home');
-Route::resource('/products', 'ProductController');
-Route::resource('/brands', 'BrandController')->middleware('Admin');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', 'ProductController@index')->name('home');
+    Route::resource('/products', 'ProductController');
+    Route::resource('/brands', 'BrandController')->middleware('Admin');
+});
+
 
 
 

@@ -15,7 +15,7 @@ class BrandController extends Controller
     public function index()
     {
         $brands= Brand::all();
-        return view('brand')->with('brands', $brands);
+        return view('brand',compact('brands'));
     }
 
     /**
