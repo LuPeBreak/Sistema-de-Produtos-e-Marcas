@@ -13,14 +13,14 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('product',compact('products'));
+        return view('product/product',compact('products'));
 
     }
 
     public function create()
     {
         $brands = Brand::all();
-        return view('product_register',compact('brands'));
+        return view('product/product_register',compact('brands'));
     }
 
     public function store(Request $request)
@@ -52,7 +52,7 @@ class ProductController extends Controller
     {
         if(Auth::user()->id == $product->user->id || Auth::user()->type == 'admin'){
         $brands = Brand::all();
-        return view('product_register',compact(['brands','product']));
+        return view('product/product_register',compact(['brands','product']));
         }
         return view('errors/unauthorized')->with('role', 'ADMINs ou o criador do produto');
     }

@@ -30,9 +30,8 @@
                                         <tr class='row'>
                                             <td class='col-md-4'>{{$brand->name}}</td>
                                             <td class='col-md-6'> {{$brand->description }} </td>
-                                            <td class='col-md-2' >
+                                            <td class='col-md-2 row' >
                                                 <a class='waves-effect waves-teal btn-flat btn-small' href="/brands/{{$brand->id}}/edit"><i class="fa fa-edit"></i></a>
-
                                                 <form action="{{route('brands.destroy',$brand->id)}}" method="post">
                                                         @method('delete')
                                                         @csrf
@@ -52,15 +51,4 @@
         </div>
     </div>
 </div>
-<script>
-new Vue({
-    el:'#root',
-    methods: {
-        deleteBrand(){
-            alert('oi');
-        }
-    },
-});
-
-</script>
 @endsection
