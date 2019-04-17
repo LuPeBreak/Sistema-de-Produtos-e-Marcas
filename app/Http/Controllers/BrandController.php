@@ -50,7 +50,7 @@ class BrandController extends Controller
 
     public function destroy(Brand $brand)
     {
-        $brand->products->delete();
+        $brand->products()->delete();
         $brand->delete();
         return redirect('/brands');
     }
