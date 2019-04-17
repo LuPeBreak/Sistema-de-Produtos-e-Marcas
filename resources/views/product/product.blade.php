@@ -16,8 +16,8 @@
                     <div class="col s12 m6">
                         <div class="card">
                             <div class="card-image">
-                                <img src="images/sample-1.jpg">
-                                <span class="card-title">{{$product->name}}</span>
+                                <img src="{{$product->imgsrc}}">
+                                <p class="card-title"><a aria-hidden="true" style='text-shadow: 1px 1px black'>{{$product->name}}</a></p>
                             <a href="{{route('products.edit',$product->id)}}" class="{{  $product->user->id != Auth::user()->id && !Auth::user()->isAdmin()? 'disabled':''}} btn-floating halfway-fab waves-effect waves-light blue"><i
                                         class="fa fa-edit"></i></a>
                             </div>

@@ -17,8 +17,7 @@
                         </form>
                         @endif
                     </div>
-                    <form method="POST"
-                        action="{{ empty($product)? route('products.store') : route('products.update',['id' => $product->id])  }}">
+                    <form method="POST" enctype="multipart/form-data"action="{{ empty($product)? route('products.store') : route('products.update',['id' => $product->id])  }}">
                         @csrf
                         @if (!empty($product))
                         @method('PUT')
@@ -58,9 +57,9 @@
                         <div class="form-group row">
                             <label for="brand" class="col-md-4 col-form-label text-md-right">Marca</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="brand" id="brand">
+                                <select class="form-control" name="brand" id="brand" required>
                                     @foreach ($brands as $brand)
-                                    <option value="{{$brand->id}}" {{ !empty($product) && $product->brand_id == $brand->id? 'selected':''}}>
+                                    <option class='{{ $errors->has('brand') ? ' is-invalid' : '' }}' value="{{$brand->id}}" {{ !empty($product) && $product->brand_id == $brand->id? 'selected':''}}>
                                         {{$brand->name}}</option>
                                     @endforeach
                                 </select>
@@ -71,6 +70,17 @@
                             </span>
                             @endif
                         </div>
+                        <div class="form-group row">
+                                <label for="image" class="col-md-4 col-form-label text-md-right">imagem (PNG)</label>
+                                <div class="col-md-6">
+                                        <input {{!empty(!$product)?'required':''}} type="file" id="name" name="image" class='{{ $errors->has('brand') ? ' is-invalid' : '' }}' accept="image/png">
+                                </div>
+                                @if ($errors->has('image'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('image') }}</strong>
+                                </span>
+                                @endif
+                            </div>
 
 
                         <div class="form-group row mb-0">
@@ -81,6 +91,10 @@
 
                             </div>
                         </div>
+
+                        
+
+
                     </form>
                     @if (empty($brand))
                     <br>
