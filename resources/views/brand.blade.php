@@ -13,33 +13,40 @@
             <div class="card" id='root'>
                 <div class="card-header row col-md-12">
                     <h6>Marcas</h6>
-                    <a class='btn-floating btn-small waves-effect waves-light green ml-auto' href="/brands/create"><i class="fa fa-plus"></i></a>
+                    <a class='btn-floating btn-small waves-effect waves-light green ml-auto' href="{{route('brands.create')}}"><i class="fa fa-plus"></i></a>
                 </div>
 
-                <div class="card-body" >
-                        <table id="example" class="display" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th>Descriçao</th>
-                                        <th></th>
+                <div class="card-body row col-md-12">
+                        <table  class="display" style="width:100%">
+                                <thead style="width:100%">
+                                    <tr class='row'>
+                                        <th class='col-md-4'>Nome</th>
+                                        <th class='col-md-6'>Descriçao</th>
+                                        <th class='col-md-2'></th>
                                     </tr>
-                                </thead>
+                                </thead style="width:100%">
                                 <tbody>
                                     @foreach ($brands as $brand)
-                                        <tr>
-                                            <td>{{$brand->name}}</td>
-                                            <td>{{$brand->description}}</td>
-                                            <td>
+                                        <tr class='row'>
+                                            <td class='col-md-4'>{{$brand->name}}</td>
+                                            <td class='col-md-6'> {{$brand->description }} </td>
+                                            <td class='col-md-2' >
                                                 <a class='waves-effect waves-teal btn-flat btn-small' href="/brands/{{$brand->id}}/edit"><i class="fa fa-edit"></i></a>
-                                                <button class='waves-effect waves-teal btn-flat btn-small' v-on:click='deleteBrand'><i class="fa fa-trash"></i></button>
+
+                                                <form action="{{route('brands.destroy',$brand->id)}}" method="post">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button class='waves-effect waves-teal btn-flat btn-small' type='submit'><i class="fa fa-trash"></i></button>
+                                               </form>
+
+                                                
                                             </td>
                                         </tr>  
                                     @endforeach
                                     
                                 </tbody>
                                 
-                            </table>
+                        </table>
                 </div>
             </div>
         </div>

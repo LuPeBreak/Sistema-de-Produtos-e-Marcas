@@ -41,4 +41,8 @@ class User extends Authenticatable
     public function isAdmin(){
         return (\Auth::check() && $this->type == 'admin');
     }
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }

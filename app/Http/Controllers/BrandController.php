@@ -37,8 +37,8 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:brands|max:30',
-            'description' => 'required',
+            'name' => 'required|unique:brands|max:15',
+            'description' => 'required|max:30',
         ]);
         Brand::create($validatedData);
         return redirect('/brands');
@@ -91,6 +91,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
+        $brand->products->delete();
         $brand->delete();
         return redirect('/brands');
     }
