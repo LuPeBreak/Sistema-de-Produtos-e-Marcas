@@ -73,14 +73,14 @@
                         <div class="form-group row">
                                 <label for="image" class="col-md-4 col-form-label text-md-right">imagem (PNG)</label>
                                 <div class="col-md-6">
-                                        <input {{!empty(!$product)?'required':''}} type="file" id="name" name="image" class='{{ $errors->has('brand') ? ' is-invalid' : '' }}' accept="image/png">
+                                        <input {{empty($product)?'required':''}} type="file" id="image" name="image" class='{{ $errors->has('brand') ? ' is-invalid' : '' }}' accept="image/png">
                                 </div>
                                 @if ($errors->has('image'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('image') }}</strong>
                                 </span>
                                 @endif
-                            </div>
+                        </div>
 
 
                         <div class="form-group row mb-0">
