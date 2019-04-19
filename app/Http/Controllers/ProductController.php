@@ -108,7 +108,7 @@ class ProductController extends Controller
         //condiçao para evitar updates por usuarios incorretos
         if(Auth::user()->id == $product->user->id || Auth::user()->type == 'admin'){
             $validatedData = $request->validate([
-                'name' => 'required|unique:brands|max:30',
+                'name' => 'required|max:30',
                 'description' => '',
                 'brand'=>'required',
             ]);
