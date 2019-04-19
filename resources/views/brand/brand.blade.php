@@ -10,7 +10,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-8">
             <div class="card" id='root'>
                 <div class="card-header row col-md-12">
                     <h6>Marcas</h6>
@@ -23,7 +23,6 @@
                         <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>Descriçao</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -31,9 +30,9 @@
                             @foreach ($brands as $brand)
                             <tr>
                                 <td>{{$brand->name}}</td>
-                                <td> {{$brand->description }} </td>
+                                
                                 <td class='row'>
-                                    <a class='waves-effect waves-teal btn-flat btn-small'
+                                    <a class='ml-auto waves-effect waves-teal btn-flat btn-small'
                                         href="/brands/{{$brand->id}}/edit"><i class="fa fa-edit"></i></a>
                                     <form action="{{route('brands.destroy',$brand->id)}}" method="post">
                                         @method('delete')
@@ -66,10 +65,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#datatable').DataTable({
-            columnDefs: [{
-                targets: [0, 1, 2],
-                className: 'mdl-data-table__cell--non-numeric'
-            }],
             "ordering": false,
             "info": false
         });

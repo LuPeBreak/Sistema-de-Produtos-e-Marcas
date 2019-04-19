@@ -42,7 +42,7 @@ class BrandController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:brands|max:30',
-            'description' => 'required',
+            'description' => '',
         ]);
         $brand->update($validatedData);
         return redirect('/brands');
