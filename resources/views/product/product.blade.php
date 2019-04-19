@@ -53,8 +53,10 @@
                         </div>
 
                         <div class="card-content">
-                            Marca:{{$product->brand->name}}
-                            <p>{{$product->description}}</p>
+                            
+                            <p>
+                                Marca: {{$product->brand->name}}
+                            </p>
                         </div>
                     </div>
                 </div>
