@@ -11,11 +11,33 @@ use File;
 
 class ProductController extends Controller
 {
+    //metodo para pesquisa de produtos
+    public function search(Request $request){
+        $brands= Brand::all();
+        
+        if ($request->brand == null) {
+            $products = Product::where('name', 'LIKE', '%'.$request->name.'%')->get();
+        }else{
+            
+            $products = Product::where('brand_id',$request->brand)->where('name', 'LIKE', '%'.$request->name.'%')->get();
+            
+        };
+        $search = [
+            'brand_id'=>$request->brand,
+            'name'=>$request->name
+        ];
+
+        return view('product/product',compact(['products','brands','search']));
+    }
+
+
+    // METODOS RESOURCE
 
     public function index()
     {
+        $brands= Brand::all();
         $products = Product::all();
-        return view('product/product',compact('products'));
+        return view('product/product',compact(['products','brands']));
 
     }
 

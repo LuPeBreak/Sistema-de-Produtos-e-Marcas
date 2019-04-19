@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'ProductController@index')->name('home');
     Route::resource('/products', 'ProductController');
     Route::resource('/brands', 'BrandController')->middleware('Admin');
+    Route::get('/product/search', 'ProductController@search')->name('products.search');
 });
 
 
