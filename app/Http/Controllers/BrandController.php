@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Brand;
 use Illuminate\Http\Request;
-
+use File;
 class BrandController extends Controller
 {
     public function index()
@@ -50,7 +50,14 @@ class BrandController extends Controller
 
     public function destroy(Brand $brand)
     {
+        //deleta imagens de cada produto da brand deletada
+        foreach ($brand->products as $product) {
+            File::delete($product->imgsrc);
+        }
+
+        //deleta produtos associados a brand
         $brand->products()->delete();
+
         $brand->delete();
         return redirect('/brands');
     }
