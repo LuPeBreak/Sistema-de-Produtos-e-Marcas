@@ -39,6 +39,7 @@ class ProductController extends Controller
     {
         $brands= Brand::all();
         $products = Product::all();
+        // dd($products[0]->imgsrc);
         return view('product/product',compact(['products','brands']));
 
     }
@@ -54,25 +55,35 @@ class ProductController extends Controller
         //valida dados
         $validatedData = $request->validate([
             'name' => 'required|unique:products|max:15',
-            'description' => 'required|max:30',
+            'description' => '',
             'brand'=>'required',
-            'image'=>'required|image',
+            'image'=>'',
         ]);
+        
+        //seta imgsrc como vazia
+        $imgsrc=null;
+
+        //verifica se ha uma img para ser carregada
+        if($request->hasFile('image')){
+
         //salvando img
         $file = $request->file('image');
         $extension=$file->getClientOriginalExtension();
         $imgname= $validatedData['name'].'.'.$extension;
         $path=public_path('/images');
-        $file->move($path,$imgname);
+        $file->move($path,$imgname);   
+        $imgsrc = "images/".$validatedData['name'].'.'.$extension;
+        }    
 
-            //procura pela marca informada
+        //procura pela marca informada
         $brand = Brand::findOrFail($request->brand);
-            //salva de acordo com a marca informada
+
+        //salva de acordo com a marca informada
         $brand->products()->create([
             'name'=> $validatedData['name'],
             'description'=> $validatedData['description'],
             'user_id'=>Auth::user()->id,
-            'imgsrc'=>"images/".$validatedData['name'].'.'.$extension,
+            'imgsrc'=>$imgsrc,
         ]);
         return redirect('/products');
     }
@@ -128,7 +139,7 @@ class ProductController extends Controller
     {
         //deleta a imagem do produto evitando excesso de imgs desnecessarias
         File::delete($product->imgsrc);
-        
+
         $product->delete();
         return redirect('products');
     }

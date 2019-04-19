@@ -44,7 +44,7 @@
                 <div class="col s12 m6">
                     <div class="card">
                         <div class="card-image">
-                            <img src="/{{$product->imgsrc}}">
+                            <img src="/{{$product->imgsrc != null ? $product->imgsrc: 'images/noimgavailable.png'}}">
                             <p class="card-title"><a aria-hidden="true"
                                     style='text-shadow: 1px 1px black'>{{$product->name}}</a></p>
                             <a href="{{route('products.edit',$product->id)}}"
