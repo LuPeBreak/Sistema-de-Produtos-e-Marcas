@@ -31,7 +31,7 @@
                                 <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Descriçao') }}</label>
     
                                 <div class="col-md-6">
-                                <textarea id="description" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" required
+                                <textarea id="description" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description"
                                     >{{ !empty($brand) ? $brand->description:''}}
                                 </textarea>
     

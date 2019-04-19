@@ -22,7 +22,7 @@ class BrandController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:brands|max:15',
-            'description' => 'required|max:30',
+            'description' => '',
         ]);
         Brand::create($validatedData);
         return redirect('/brands');
