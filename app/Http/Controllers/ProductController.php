@@ -109,7 +109,7 @@ class ProductController extends Controller
         if(Auth::user()->id == $product->user->id || Auth::user()->type == 'admin'){
             $validatedData = $request->validate([
                 'name' => 'required|unique:brands|max:30',
-                'description' => 'required',
+                'description' => '',
                 'brand'=>'required',
             ]);
             //checagem de imagem para o ou nao update do arquivo    
