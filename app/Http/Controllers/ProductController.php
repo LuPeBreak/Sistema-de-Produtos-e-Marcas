@@ -13,15 +13,17 @@ class ProductController extends Controller
 {
     //metodo para pesquisa de produtos
     public function search(Request $request){
+        //brands para popular o select da pesquisa
         $brands= Brand::all();
         
+        //pesquisa condicional de produtos
         if ($request->brand == null) {
             $products = Product::where('name', 'LIKE', '%'.$request->name.'%')->get();
         }else{
-            
             $products = Product::where('brand_id',$request->brand)->where('name', 'LIKE', '%'.$request->name.'%')->get();
             
         };
+        //retorna dados da pesquisa para melhora da UX
         $search = [
             'brand_id'=>$request->brand,
             'name'=>$request->name
@@ -92,13 +94,14 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        //condiçao para evitar updates por usuarios incorretos
         if(Auth::user()->id == $product->user->id || Auth::user()->type == 'admin'){
             $validatedData = $request->validate([
                 'name' => 'required|unique:brands|max:30',
                 'description' => 'required',
                 'brand'=>'required',
             ]);
-            //checagem de imagem    
+            //checagem de imagem para o ou nao update do arquivo    
             if($request->hasFile('image')){
                 //salvando img
                 File::delete($product->imgsrc);
@@ -108,7 +111,7 @@ class ProductController extends Controller
                 $path=public_path('/images');
                 $file->move($path,$imgname);
             }
-
+            //update de produto
             $product->update([
                 'name' => $validatedData['name'],
                 'description' => $validatedData['description'],
@@ -123,7 +126,9 @@ class ProductController extends Controller
     
     public function destroy(Product $product)
     {
+        //deleta a imagem do produto evitando excesso de imgs desnecessarias
         File::delete($product->imgsrc);
+        
         $product->delete();
         return redirect('products');
     }
